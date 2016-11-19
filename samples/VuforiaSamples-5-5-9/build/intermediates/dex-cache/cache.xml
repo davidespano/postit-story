@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/davide/Downloads/postit-story/samples/VuforiaSamples-5-5-9/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="da8dcfef1d7f46488cf89771b8846d1b13c4beff">
+        <dex dex="/Users/davide/Downloads/postit-story/samples/VuforiaSamples-5-5-9/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_24a33cec4c99249332c2f63d5bf32fedff46b19a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/davide/Downloads/postit-story/build/java/vuforia/Vuforia.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="f5b9729417d9e86d9bba6068e4a84f05ace53fd4">
+        <dex dex="/Users/davide/Downloads/postit-story/samples/VuforiaSamples-5-5-9/app/build/intermediates/transforms/dex/debug/folders/1000/2/Vuforia_1fea81311770631e03f8579297c0b92501eab21e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/davide/Downloads/postit-story/samples/VuforiaSamples-5-5-9/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="7c8cfc21675bb63f0a04d366e01fe0e76e08f95e">
+        <dex dex="/Users/davide/Downloads/postit-story/samples/VuforiaSamples-5-5-9/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_d28059862567ad98b57330f648ecd37bf4408ea0/classes.dex" />
+    </item>
+
+</items>

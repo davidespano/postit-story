@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary">
+
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@color/primary">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:text="1/20"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_normal"
+            android:background="@color/primary"
+            android:gravity="center"
+            android:paddingBottom="6dp" />
+        <LinearLayout
+            android:id="@+id/layBut"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/primary">
+
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:gravity="center_vertical|left"
+                android:textSize="@dimen/menu_title"
+                android:fontFamily="sans-serif"
+                android:text="&lt;"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom|left"
+                android:layout_weight="0"
+                android:src="@drawable/back"
+                android:background="@color/transparent"
+                />
+
+            <ImageButton
+                android:id="@+id/button_cam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/camera"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="false"
+                android:nestedScrollingEnabled="false"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:text=">"
+                android:id="@+id/button_next"
+                android:gravity="center_vertical|right"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/menu_title"
+                android:fontFamily="sans-serif"
+                android:layout_weight="0"
+                android:layout_gravity="bottom|left"
+                android:src="@drawable/next"
+                android:background="@color/transparent"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/story_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_layout"
+        android:background="@color/primary"
+        android:clickable="true"
+        android:textSize="@dimen/text_size_story"
+        android:textColor="@color/black"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+
+        />
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/primary"
+        android:id="@+id/correct_feedback">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/correct"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/primary"
+        android:id="@+id/wrong_feedback">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wrong"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</RelativeLayout>
