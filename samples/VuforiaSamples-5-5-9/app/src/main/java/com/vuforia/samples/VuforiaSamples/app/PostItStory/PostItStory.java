@@ -9,10 +9,12 @@ countries.
 ===============================================================================*/
 
 package com.vuforia.samples.VuforiaSamples.app.PostItStory;
+import com.vuforia.TrackableResult;
 import com.vuforia.samples.VuforiaSamples.app.PostItNote.*;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -21,10 +23,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -100,6 +107,10 @@ public class PostItStory extends Activity implements SampleApplicationControl,
 
     private List<Parola> parolas=new ArrayList();
 
+    private int selectedIndex = -1;
+
+    FrameLayout overlay= null;
+
     //utility for unzip lezione folder
     private boolean unpackZip(String path, String zipname){
         InputStream is;
@@ -145,15 +156,17 @@ public class PostItStory extends Activity implements SampleApplicationControl,
     protected void onCreate(Bundle savedInstanceState)
     {
         Log.d("Creato:","ok");
-        try {
-            this.unpackZip("/storage/emulated/0/","lezione.zip");
-            parolas = Updater.updateNote();
+        Bundle extras = getIntent().getExtras();
+        final String directory = extras.getString("story");
 
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            //this.unpackZip("/storage/emulated/0/","lezione.zip");
+        if(!Updater.getInstance().isLoaded()){
+            Updater.getInstance().loadStoryResources(directory);
         }
+
+        parolas = Updater.getInstance().getWords();
+
+
 
 
         Log.d(LOGTAG, "onCreate");
@@ -171,7 +184,7 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         mGestureDetector = new GestureDetector(this, new GestureListener());
 
         // Load any sample specific textures:
-        mTextures = new Vector<Texture>();
+        mTextures = new Vector<Texture>(PostItNote.NUM_TARGETS);
         loadTextures();
 
         mIsDroidDevice = android.os.Build.MODEL.toLowerCase().startsWith(
@@ -181,6 +194,8 @@ public class PostItStory extends Activity implements SampleApplicationControl,
 
 
     }
+
+
 
     // Process Single Tap event to trigger autofocus
     private class GestureListener extends
@@ -207,70 +222,16 @@ public class PostItStory extends Activity implements SampleApplicationControl,
             //Imposto lettura file audio
             for(int i = 0; i< parolas.size();i++) {
                 //ind= i+1;
-                if (mRenderer.isTapOnScreenInsideTarget(i, e.getX(), e.getY())==1) {
-                    /*String path = "/storage/emulated/0/lezione/"+parolas.get(i).getPathfl();
-                    MediaPlayer audio = new MediaPlayer();
-                    try {
-                        audio.setDataSource(path);
-                        audio.prepare();
-                        audio.start();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }*/
-                    if(i==2){
-                        //ok
-                        //Toast.makeText(pis, "Corretto!", Toast.LENGTH_SHORT).show();
+                switch (mRenderer.isTapOnScreenInsideTarget(i, e.getX(), e.getY())) {
+                    case 1:
+                        Updater.getInstance().playAudio(parolas.get(i).getPathfl());
+                        break;
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(pis);
-
-                        builder.setMessage("Complimenti! La parola dselezionata è corretta!")
-                                .setTitle("Corretto!");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }else{
-                        //no
-                        Toast.makeText(pis, "Errato!", Toast.LENGTH_SHORT).show();
-                    }
-                    //MediaPlayer door = MediaPlayer.create(PostItNote.this, R.raw.audiofl);
-                    //door.start();
-                }
-                else if(mRenderer.isTapOnScreenInsideTarget(i, e.getX(), e.getY())==2){
-                    //String path = "/storage/emulated/0/lezione/"+parolas.get(i).getPathsl();
-                    //MediaPlayer audio = new MediaPlayer();
-                    /*try {
-                        audio.setDataSource(path);
-                        audio.prepare();
-                        audio.start();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }*/
-
-                    if(i==2){
-                        //ok
-                        AlertDialog.Builder builder = new AlertDialog.Builder(pis);
-
-                        builder.setMessage("Complimenti! La parola selezionata è corretta!")
-                                .setTitle("Corretto!");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }else{
-                        //no
-                        Toast.makeText(pis, "Errato!", Toast.LENGTH_SHORT).show();
-                    }
-                    //MediaPlayer door = MediaPlayer.create(PostItNote.this, R.raw.audiosl);
-                    //door.start();
+                    case 2:
+                        Updater.getInstance().playAudio(parolas.get(i).getPathsl());
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -297,16 +258,18 @@ public class PostItStory extends Activity implements SampleApplicationControl,
     // for rendering.
     private void loadTextures()
     {
-        //mTextures.add(Texture.loadTextureFromApk("PostItNote/ARLayer.png",
-        //    getAssets()));
 
         for(int i = 0 ; i < parolas.size() ; i++) {
-            mTextures.add(Texture.loadTextureFromPath(parolas.get(i).getPathTexture()));
+            Texture t = Texture.loadTextureFromPath(parolas.get(i).getPathTexture());
+            mTextures.add(t);
         }
-        //mTextures.add(Texture.loadTextureFromApk("PostItNote/ProvaFabio.png", getAssets()));
-        //mTextures.add(Texture.loadTextureFromApk("PostItNote/Tavolo-Table.png", getAssets()));
-        //mTextures.add(Texture.loadTextureFromApk("PostItNote/ARLayer.png", getAssets()));
-        //mTextures.add(Texture.loadTextureFromApk("PostItNote/Ventilatore-Fan.png", getAssets()));
+    }
+
+    private void returnAnswer(){
+        Intent data = new Intent();
+        data.putExtra("answer", selectedIndex);
+        setResult(Activity.RESULT_OK, data);
+        finish();
     }
 
 
@@ -571,8 +534,46 @@ public class PostItStory extends Activity implements SampleApplicationControl,
             // that the OpenGL ES surface view gets added
             // BEFORE the camera is started and video
             // background is configured.
-            addContentView(mGlView, new LayoutParams(LayoutParams.MATCH_PARENT,
+
+            // [davide] aggiungo un pulsante
+            FrameLayout layout = new FrameLayout(this);
+            layout.addView(mGlView, new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.MATCH_PARENT));
+
+             overlay = new FrameLayout(this);
+            ImageButton select = new ImageButton(this);
+            select.setImageResource(R.drawable.camera);
+            final float scale = getResources().getDisplayMetrics().density;
+            int dp150 = (int) (120 * scale + 0.5f);
+
+            FrameLayout.LayoutParams selectParams = new FrameLayout.LayoutParams(
+                    dp150,
+                    dp150
+            );
+            selectParams.gravity = Gravity.CENTER;
+            select.setBackgroundColor(Color.TRANSPARENT);
+            select.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            select.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    returnAnswer();
+                }
+            });
+
+            overlay.addView(select, selectParams);
+
+
+            FrameLayout.LayoutParams overlayParams = new FrameLayout.LayoutParams(
+                    LayoutParams.MATCH_PARENT,
+                    dp150
+            );
+            overlayParams.gravity = Gravity.BOTTOM;
+            overlay.setBackgroundColor(Color.TRANSPARENT);
+            layout.addView(overlay, overlayParams);
+
+            addContentView(layout, new LayoutParams(LayoutParams.MATCH_PARENT,
+                            LayoutParams.MATCH_PARENT));
 
             // Sets the UILayout to be drawn in front of the camera
             mUILayout.bringToFront();
@@ -649,6 +650,15 @@ public class PostItStory extends Activity implements SampleApplicationControl,
     @Override
     public void onVuforiaUpdate(State state)
     {
+        int tr = state.getNumTrackableResults();
+        if(tr == 1){
+            TrackableResult result = state.getTrackableResult(0);
+            selectedIndex = parolas.get(result.getTrackable().getId()).getId_marker();
+            overlay.setVisibility(View.VISIBLE);
+        }else{
+            selectedIndex = -1;
+            overlay.setVisibility(View.INVISIBLE);
+        }
     }
 
     final public static int CMD_BACK = -1;

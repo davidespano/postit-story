@@ -69,13 +69,13 @@ public class Texture
     /* Factory function to load a texture from the APK. */
     public static Texture loadTextureFromPath(String fileName)
     {
-        String path = "/storage/emulated/0/lezione/"+fileName;
+        //String path = "/storage/emulated/0/lezione/"+fileName;
         //String path = "/storage/emulated/0/lezione/0/ARLayer.png";
         //path = path+fileName;
-        Log.i(LOGTAG, path);
+        //.Log.i(LOGTAG, path);
         try
         {
-            Bitmap bitMap = BitmapFactory.decodeFile(path);
+            Bitmap bitMap = BitmapFactory.decodeFile(fileName);
             int[] data = new int[bitMap.getWidth() * bitMap.getHeight()];
             bitMap.getPixels(data, 0, bitMap.getWidth(), 0, 0,
                     bitMap.getWidth(), bitMap.getHeight());

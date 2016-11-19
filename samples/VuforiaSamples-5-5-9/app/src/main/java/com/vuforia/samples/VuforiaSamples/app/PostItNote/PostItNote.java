@@ -94,7 +94,8 @@ public class PostItNote extends Activity implements SampleApplicationControl,
 
     boolean mIsDroidDevice = false;
 
-    public static final int NUM_TARGETS = 10;
+    //TODO rendere questo valore variabile a seconda dei dati
+    public static final int NUM_TARGETS = 50;
 
     private List<Parola> parolas=new ArrayList();
 
@@ -143,7 +144,7 @@ public class PostItNote extends Activity implements SampleApplicationControl,
     protected void onCreate(Bundle savedInstanceState)
     {
         Log.d("Creato:","ok");
-        try {
+        /*try {
             this.unpackZip("/storage/emulated/0/","lezione.zip");
             parolas = Updater.updateNote();
 
@@ -151,7 +152,7 @@ public class PostItNote extends Activity implements SampleApplicationControl,
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         Log.d(LOGTAG, "onCreate");
         super.onCreate(savedInstanceState);
 
@@ -198,10 +199,9 @@ public class PostItNote extends Activity implements SampleApplicationControl,
             for(int i = 0; i< parolas.size();i++) {
                 ind= i+1;
                 if (mRenderer.isTapOnScreenInsideTarget(i, e.getX(), e.getY())==1) {
-                    String path = "/storage/emulated/0/lezione/"+parolas.get(i).getPathfl();
                     MediaPlayer audio = new MediaPlayer();
                     try {
-                        audio.setDataSource(path);
+                        audio.setDataSource(parolas.get(i).getPathfl());
                         audio.prepare();
                         audio.start();
                     } catch (IOException e1) {

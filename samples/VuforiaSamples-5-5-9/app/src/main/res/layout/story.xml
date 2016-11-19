@@ -23,7 +23,8 @@
             android:textSize="@dimen/text_size_normal"
             android:background="@color/primary"
             android:gravity="center"
-            android:paddingBottom="6dp" />
+            android:paddingBottom="6dp"
+            android:id="@+id/stepText" />
         <LinearLayout
             android:id="@+id/layBut"
             android:orientation="horizontal"
