@@ -95,7 +95,7 @@ public class PostItNote extends Activity implements SampleApplicationControl,
     boolean mIsDroidDevice = false;
 
     //TODO rendere questo valore variabile a seconda dei dati
-    public static final int NUM_TARGETS = 50;
+    public static final int NUM_TARGETS = 30;
 
     private List<Parola> parolas=new ArrayList();
 

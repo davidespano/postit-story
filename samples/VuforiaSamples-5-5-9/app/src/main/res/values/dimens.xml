@@ -11,7 +11,7 @@
     <dimen name="menu_entries_top_down_padding">15dp</dimen>
     <dimen name="menu_entries_top_down_radio_padding">7dp</dimen>
     <dimen name="text_size_normal">20sp</dimen>
-    <dimen name="text_size_story">36sp</dimen>
+    <dimen name="text_size_story">32sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
 
 </resources>

@@ -44,6 +44,7 @@ public class PostItStoryText extends Activity {
     private static final int CORRECT = 1;
     private static final int WRONG = -1;
     private static final int NEUTRAL = 0;
+    private static final int QUESTION = 2;
 
     private TextView storyText;
     private TextView storyStep;
@@ -56,7 +57,9 @@ public class PostItStoryText extends Activity {
     private int storyPosition = 0;
     private int max = -1;
     private int nAnswers = 0;
+    private int questions[];
     private String correctWord = "";
+    private int correctReference = -1;
     private String[] answers;
     private int[] answerState;
     private File currentPath;
@@ -140,11 +143,14 @@ public class PostItStoryText extends Activity {
         currentPath = new File(storyDirectory.getAbsolutePath() + File.separator + directory);
         Updater.getInstance().loadStoryResources(currentPath.getAbsolutePath());
         max = Updater.getInstance().getSteps();
+        questions = new int[max];
         answerState = new int[max];
         answers = new String[max];
+        int question = 0;
         for(int i = 0; i < answerState.length; i++){
             answerState[i] = NEUTRAL;
             if(Updater.getInstance().getStoryPhrase(i + 1).contains("#")){
+                questions[i] = ++question;
                 nAnswers++;
             }
         }
@@ -185,26 +191,26 @@ public class PostItStoryText extends Activity {
 
         for(int i = 0; i < answerState.length; i++){
             if(answerState[i] == CORRECT){
-                buffer.append(answers[i]).append(",");
+                buffer.append(answers[i]).append(", ");
             }
         }
         if(correctCount > 0){
-            buffer.delete(buffer.length() -1, buffer.length());
+            buffer.delete(buffer.length() -2, buffer.length());
         }
         buffer.append("\n\n");
 
         bold[2] = buffer.length();
         buffer.append("WRONG ANSWERS\n");
-        buffer.append(correctCount).append("/").append(nAnswers).append("\n");
+        buffer.append(wrongCount).append("/").append(nAnswers).append("\n");
         bold[3] = buffer.length();
 
         for(int i = 0; i < answerState.length; i++){
             if(answerState[i] == WRONG){
-                buffer.append(answers[i]).append(",");
+                buffer.append(answers[i]).append(", ");
             }
         }
         if(wrongCount > 0){
-            buffer.delete(buffer.length() -1, buffer.length());
+            buffer.delete(buffer.length() -2, buffer.length());
         }
 
         SpannableString spannableString = new SpannableString(buffer.toString());
@@ -217,7 +223,7 @@ public class PostItStoryText extends Activity {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
-        storyText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        storyText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 
         storyText.setText(spannableString);
         storyText.setMovementMethod(LinkMovementMethod.getInstance());
@@ -230,9 +236,10 @@ public class PostItStoryText extends Activity {
 
     private void setStoryText(int position){
 
-        if(answerCompleted()){
-            showSummary();
-        }
+       if(position > max){
+           showSummary();
+           return;
+       }
 
         if(position >= 1 && position <= max){
             storyPosition = position;
@@ -245,7 +252,11 @@ public class PostItStoryText extends Activity {
         }
 
         if(position == max){
-            nextButton.setVisibility(View.INVISIBLE);
+            if(answerCompleted()){
+                nextButton.setVisibility(View.VISIBLE);
+            }else{
+                nextButton.setVisibility(View.INVISIBLE);
+            }
         }else{
             nextButton.setVisibility(View.VISIBLE);
         }
@@ -259,7 +270,9 @@ public class PostItStoryText extends Activity {
         }
 
         if(split.length == 3){
+
             int dictionaryReference = Integer.parseInt(split[1]);
+            correctReference = dictionaryReference;
             correctWord = Updater.getInstance().getWord(dictionaryReference);
             StringBuffer buffer = new StringBuffer();
             for(int i = 0; i< correctWord.length(); i++){
@@ -273,7 +286,18 @@ public class PostItStoryText extends Activity {
             text = path.format(split);
             showHiddenWord(text, startIndex, lastIndex);
             storyStep.setVisibility(View.VISIBLE);
-            storyStep.setText(storyPosition + "/" + nAnswers);
+            storyStep.setText(questions[storyPosition - 1] + "/" + nAnswers);
+            switch (answerState[storyPosition]){
+                case NEUTRAL:
+                    cameraButton.setImageResource(R.drawable.camera);
+                    break;
+                case WRONG:
+                    cameraButton.setImageResource(R.drawable.wrong);
+                    break;
+                case CORRECT:
+                    cameraButton.setImageResource(R.drawable.correct);
+                    break;
+            }
         }else{
             showTextWithoutQuestion(split[0]);
             storyStep.setVisibility(View.INVISIBLE);
@@ -290,7 +314,7 @@ public class PostItStoryText extends Activity {
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                launchCameraActivity();
+                playCorrectAudio();
             }
             @Override
             public void updateDrawState(TextPaint ds) {
@@ -313,6 +337,9 @@ public class PostItStoryText extends Activity {
         cameraButton.setVisibility(View.INVISIBLE);
     }
 
+    private void playCorrectAudio(){
+        Updater.getInstance().playAudio(correctReference);
+    }
 
     private void launchCameraActivity(){
 
@@ -328,11 +355,13 @@ public class PostItStoryText extends Activity {
                 int dictionaryReference = data.getIntExtra("answer", -1);
                 if(dictionaryReference != -1){
                     String selectedWord = Updater.getInstance().getWord(dictionaryReference);
+                    answers[storyPosition] = correctWord;
                     if(selectedWord.equals(correctWord)){
-                        answerState[storyPosition] = 1;
+                        answerState[storyPosition] = CORRECT;
+
                         updateTextOk(text, correctWord, startIndex, lastIndex);
                     }else{
-                        answerState[storyPosition] = -1;
+                        answerState[storyPosition] = WRONG;
                         updateTextWrong(text, selectedWord, correctWord, startIndex, lastIndex);
                     }
                 }

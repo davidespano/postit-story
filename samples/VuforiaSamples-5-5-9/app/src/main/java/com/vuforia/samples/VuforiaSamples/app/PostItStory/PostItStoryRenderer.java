@@ -199,6 +199,10 @@ public class PostItStoryRenderer implements GLSurfaceView.Renderer
             targetPositiveDimensions[i].setData(temp);
         }
 
+        if(state.getNumTrackableResults() > 0){
+            System.out.println();
+        }
+
         // Did we find any trackables this frame?
         for (int tIdx = 0; tIdx < state.getNumTrackableResults(); tIdx++)
         {

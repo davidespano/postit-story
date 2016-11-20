@@ -220,15 +220,14 @@ public class PostItStory extends Activity implements SampleApplicationControl,
 
             //Integer ind;
             //Imposto lettura file audio
-            for(int i = 0; i< parolas.size();i++) {
-                //ind= i+1;
+            for(int i = 0; i< mTextures.size();i++) {
+                int index = getIndexFromMarkerId(i);
                 switch (mRenderer.isTapOnScreenInsideTarget(i, e.getX(), e.getY())) {
                     case 1:
-                        Updater.getInstance().playAudio(parolas.get(i).getPathfl());
+                        Updater.getInstance().playAudio(parolas.get(index).getPathfl());
                         break;
-
                     case 2:
-                        Updater.getInstance().playAudio(parolas.get(i).getPathsl());
+                        Updater.getInstance().playAudio(parolas.get(index).getPathsl());
                         break;
                     default:
                         break;
@@ -258,10 +257,21 @@ public class PostItStory extends Activity implements SampleApplicationControl,
     // for rendering.
     private void loadTextures()
     {
+        if(parolas.size() == 0){
+            return;
+        }
+
+        int maxIndex = getMaxId() + 1;
+
+        for(int i = 0; i < maxIndex ; i++){
+            mTextures.add(Texture.loadTextureFromPath(parolas.get(0).getPathTexture()));
+        }
 
         for(int i = 0 ; i < parolas.size() ; i++) {
+            int index = parolas.get(i).getId_marker();
             Texture t = Texture.loadTextureFromPath(parolas.get(i).getPathTexture());
-            mTextures.add(t);
+            mTextures.set(index, t);
+            //mTextures.add(t);
         }
     }
 
@@ -272,6 +282,16 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         finish();
     }
 
+    private int getMaxId(){
+        int maxIndex = -1;
+        for(int i = 0; i < parolas.size(); i++){
+            if(parolas.get(i).getId_marker() > maxIndex){
+                maxIndex = parolas.get(i).getId_marker();
+            }
+        }
+
+        return maxIndex;
+    }
 
     // Called when the activity will start interacting with the user.
     @Override
@@ -425,6 +445,8 @@ public class PostItStory extends Activity implements SampleApplicationControl,
                 .getClassType());
         MarkerTracker markerTracker = (MarkerTracker) (trackerBase);
 
+
+
         if (markerTracker == null)
         {
             Log.e(
@@ -449,8 +471,9 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         if (markerTracker == null)
             return false;
 
-        dataSet = new Marker[parolas.size()];
-        for(int i = 0; i<parolas.size(); i++){
+        int maxIndex = getMaxId() + 1;
+        dataSet = new Marker[maxIndex];
+        for(int i = 0; i< maxIndex ; i++){
             dataSet[i] = markerTracker.createFrameMarker(i, "Marker"+i, new Vec2F(40, 40));
             if (dataSet[i] == null)
             {
@@ -474,6 +497,8 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         TrackerManager tManager = TrackerManager.getInstance();
         MarkerTracker markerTracker = (MarkerTracker) tManager
                 .getTracker(MarkerTracker.getClassType());
+
+        int markers = markerTracker.getNumMarkers();
         if (markerTracker != null)
             markerTracker.start();
 
@@ -653,7 +678,7 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         int tr = state.getNumTrackableResults();
         if(tr == 1){
             TrackableResult result = state.getTrackableResult(0);
-            selectedIndex = parolas.get(result.getTrackable().getId()).getId_marker();
+            selectedIndex = getIdFromTextureIndex(result.getTrackable().getId());
             overlay.setVisibility(View.VISIBLE);
         }else{
             selectedIndex = -1;
@@ -672,6 +697,24 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         group.addTextItem(getString(R.string.menu_back), -1);
 
         mSampleAppMenu.attachMenu();
+    }
+
+    private int getIdFromTextureIndex(int textureIndex){
+        for(int i = 0; i < parolas.size(); i++){
+            if(textureIndex == parolas.get(i).getId_marker()){
+                return  parolas.get(i).getId_marker();
+            }
+        }
+        return -1;
+    }
+
+    private int getIndexFromMarkerId(int markerId){
+        for(int i = 0; i < parolas.size(); i++){
+            if(markerId == parolas.get(i).getId_marker()){
+                return  i;
+            }
+        }
+        return -1;
     }
 
 

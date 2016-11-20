@@ -151,6 +151,15 @@ public class Updater {
         return words;
     }
 
+    public void playAudio(int id){
+        for(Parola p : words){
+            if(p.getId_marker() == id){
+                playAudio(p.getPathsl());
+                return;
+            }
+        }
+    }
+
     public void playAudio(String path){
         try {
             MediaPlayer audio = new MediaPlayer();
