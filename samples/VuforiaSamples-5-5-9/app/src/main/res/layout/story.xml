@@ -25,6 +25,7 @@
             android:gravity="center"
             android:paddingBottom="6dp"
             android:id="@+id/stepText" />
+
         <LinearLayout
             android:id="@+id/layBut"
             android:orientation="horizontal"
@@ -77,20 +78,34 @@
 
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/story_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_layout"
-        android:background="@color/primary"
-        android:clickable="true"
-        android:textSize="@dimen/text_size_story"
-        android:textColor="@color/black"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp"
+        android:orientation="vertical"
+        android:layout_above="@id/bottom_layout">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:src="@drawable/back"
+            android:id="@+id/storyScreen" />
 
-        />
+        <TextView
+            android:id="@+id/story_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary"
+            android:clickable="true"
+            android:textSize="@dimen/text_size_story"
+            android:textColor="@color/black"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
 
 
 

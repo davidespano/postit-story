@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<story name="The sleeping beauty">
+	<item id="1">
+		In a far away kingdom there is a good king and a beautiful #1#. 
+	</item>
+	<item id="2">
+		They have everything they wanted, but a child. At last, their wish came true and the queen has a lovely little #5#.
+	</item>
+	<item id="3">
+		The king is very happy and he gives a big feast in his #6#.
+	</item>
+	<item id="4">
+		The bad witch was not invited to the feast. She is very sad and angry.
+	</item>
+	<item id="5">
+		So the  witch casts a bad spell on the poor girl: "I wish the king's daughter hurts herself and dies" 
+	</item>
+	<item id="6">
+		A good fairy tries to break the bad spell: "She shall not die but sleep for a hundred years."
+	</item>
+	<item id="7">
+		Time passes and the #2#'s daughter grows up to a beautiful and good princess. 
+	</item>
+	<item id="8">
+		One day she goes for a walk around the castle and she comes to an old and very high #9#. 
+	</item>
+	<item id="9">
+		She sees an old woman sewing a dress with a #8# in his hand.	
+	</item>
+	<item id="10">
+		"Can I try it?" the king's daughter says. Once she touches the needle, she pricks her finger with it.
+	</item>
+	<item id="11">
+		Suddenly she falls down in a deep sleep.
+	</item>
+	<item id="12">
+		The good faires lay her put her on a #10# of flowers. 
+	</item>
+	<item id="13">
+		After a hundred years, a good prince hears the story of the castle and the beautiful princess who sleeps there. 
+	</item>
+	<item id="14">
+		He goes into the castle and reaches the last room, opens the #12# and sees the princess sleeping. 
+	</item>
+	<item id="15">
+		The prince gives her a #13#. 
+	</item>
+	<item id="16">
+		As soon as he kisses the princess, she opens her eyes and looks at him sweetly.
+	</item>
+	<item id="17">
+		Then, the prince and the #11# get married soon and they live happily ever after.
+	</item>
+<dictionary name="test" category="Fiabe">
+	<item id="1">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">regina</syntax>
+            <phonetics>/re'ʤina/</phonetics>
+            <audio valid="true" path="1/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="2">queen</syntax>
+           <phonetics>/kwiːn/</phonetics>
+           <audio valid="true" path="1/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="1/ARLayer.png"/>
+    </item>
+	<item id="2">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">re</syntax>
+            <phonetics>/ˈre/</phonetics>
+            <audio valid="true" path="2/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="3">king</syntax>
+           <phonetics>/kɪŋ/</phonetics>
+           <audio valid="true" path="2/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="2/ARLayer.png"/>
+    </item>
+	<item id="3">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">rana</syntax>
+            <phonetics>/'rana/</phonetics>
+            <audio valid="true" path="3/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="5">frog</syntax>
+           <phonetics>/frɒɡ/</phonetics>
+           <audio valid="true" path="3/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="3/ARLayer.png"/>
+    </item>
+	<item id="4">
+	    <firstLanguageWord id="1">
+	        <language label="ITA" name="Italiano"/>
+	        <syntax id="3">acqua</syntax>
+	        <phonetics>/ˈakkwa/</phonetics>
+	        <audio valid="true" path="4/audioFL.ogg"/>
+	    </firstLanguageWord>
+	    <secondLanguageWord id="2">
+	       <language label="ING" name="Inglese"/>
+	       <syntax id="16">water</syntax>
+	       <phonetics>/ˈwɔːtə(ɹ)/</phonetics>
+	       <audio valid="true" path="4/audioSL.ogg"/>
+	    </secondLanguageWord>
+	    <ARLayer valid="true" path="4/ARLayer.png"/>
+    </item>
+	<item id="5">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">figlia</syntax>
+            <phonetics>/'fiʎʎa/</phonetics>
+            <audio valid="true" path="5/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="4">daughter</syntax>
+           <phonetics>/ˈdɔːtə(ɹ)/</phonetics>
+           <audio valid="true" path="5/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="5/ARLayer.png"/>
+    </item>
+	<item id="6">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">castello</syntax>
+            <phonetics>/ka.ˈstɛl.lo/</phonetics>
+            <audio valid="true" path="6/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="8">castle</syntax>
+           <phonetics>/ˈkɑː.səl/</phonetics>
+           <audio valid="true" path="6/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="6/ARLayer.png"/>
+    </item>
+	<item id="7">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">donna</syntax>
+            <phonetics>/ˈdɔnna/</phonetics>
+            <audio valid="true" path="7/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="9">woman</syntax>
+           <phonetics>/ˈwʊmən/</phonetics>
+           <audio valid="true" path="7/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="7/ARLayer.png"/>
+    </item>
+	<item id="8">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">ago</syntax>
+            <phonetics>/'a.go/</phonetics>
+            <audio valid="true" path="8/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="15">needle</syntax>
+           <phonetics>/ˈniː.dl/</phonetics>
+           <audio valid="true" path="8/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="8/ARLayer.png"/>
+    </item>
+	<item id="9">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">torre</syntax>
+            <phonetics>/'torre/</phonetics>
+            <audio valid="true" path="9/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="10">tower</syntax>
+           <phonetics>/ˈtaʊ.ə(ɹ)/</phonetics>
+           <audio valid="true" path="9/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="9/ARLayer.png"/>
+    </item>
+	<item id="10">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">letto</syntax>
+            <phonetics>/ˈlɛtto/</phonetics>
+            <audio valid="true" path="10/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="12">bed</syntax>
+           <phonetics>/bɛːd/</phonetics>
+           <audio valid="true" path="10/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="10/ARLayer.png"/>
+    </item>
+	<item id="11">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">principessa</syntax>
+            <phonetics>/'prinʧipessa/</phonetics>
+            <audio valid="true" path="11/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="7">princess</syntax>
+           <phonetics>/pɹɪnˈsɛs/</phonetics>
+           <audio valid="true" path="11/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="11/ARLayer.png"/>
+    </item>
+ 	<item id="12">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">porta</syntax>
+            <phonetics>/'pɔr.ta/</phonetics>
+            <audio valid="true" path="12/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="13">door</syntax>
+           <phonetics>/dɔː/</phonetics>
+           <audio valid="true" path="12/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="12/ARLayer.png"/>
+    </item>
+ 	<item id="13">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">bacio</syntax>
+            <phonetics>/ba'ʧo/</phonetics>
+            <audio valid="true" path="13/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="14">kiss</syntax>
+           <phonetics>/kɪs/</phonetics>
+           <audio valid="true" path="13/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="13/ARLayer.png"/>
+    </item>
+    <item id="14">
+        <firstLanguageWord id="1">
+            <language label="ITA" name="Italiano"/>
+            <syntax id="3">regno</syntax>
+            <phonetics>/'reɲɲo/</phonetics>
+            <audio valid="true" path="14/audioFL.ogg"/>
+        </firstLanguageWord>
+        <secondLanguageWord id="2">
+           <language label="ING" name="Inglese"/>
+           <syntax id="6">kingdom</syntax>
+           <phonetics>/ˈkɪŋdəm/</phonetics>
+           <audio valid="true" path="14/audioSL.ogg"/>
+        </secondLanguageWord>
+        <ARLayer valid="true" path="14/ARLayer.png"/>
+    </item>
+</dictionary>
+</story>
+        

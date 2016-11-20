@@ -13,11 +13,13 @@ import com.vuforia.TrackableResult;
 import com.vuforia.samples.VuforiaSamples.app.PostItNote.*;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -155,6 +157,11 @@ public class PostItStory extends Activity implements SampleApplicationControl,
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // [davide] hack per sollevare il volume
+        AudioManager amanager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+        int maxVolume = amanager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+        amanager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
+        
         Log.d("Creato:","ok");
         Bundle extras = getIntent().getExtras();
         final String directory = extras.getString("story");
@@ -264,7 +271,7 @@ public class PostItStory extends Activity implements SampleApplicationControl,
         int maxIndex = getMaxId() + 1;
 
         for(int i = 0; i < maxIndex ; i++){
-            mTextures.add(Texture.loadTextureFromPath(parolas.get(0).getPathTexture()));
+            mTextures.add(null);
         }
 
         for(int i = 0 ; i < parolas.size() ; i++) {
@@ -272,6 +279,12 @@ public class PostItStory extends Activity implements SampleApplicationControl,
             Texture t = Texture.loadTextureFromPath(parolas.get(i).getPathTexture());
             mTextures.set(index, t);
             //mTextures.add(t);
+        }
+        for(int i = 0; i < maxIndex ; i++){
+            if(mTextures.get(i) == null){
+                Texture t = Texture.loadTextureFromPath(parolas.get(0).getPathTexture());
+                mTextures.set(i, t);
+            }
         }
     }
 

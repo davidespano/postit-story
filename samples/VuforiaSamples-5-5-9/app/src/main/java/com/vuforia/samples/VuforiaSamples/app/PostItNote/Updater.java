@@ -1,5 +1,6 @@
 package com.vuforia.samples.VuforiaSamples.app.PostItNote;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.util.Log;
 import android.util.Xml;
@@ -45,7 +46,7 @@ public class Updater {
     private NodeList items;
     List<Parola> words;
     private boolean loaded = false;
-
+    String directory;
 
     private Updater(){
         words = new ArrayList<>();
@@ -63,9 +64,10 @@ public class Updater {
     public  void loadStoryResources(String directory){
 
         try {
+            this.directory = directory;
             XPathFactory factory = XPathFactory.newInstance();
             xPath = factory.newXPath();
-            FileReader storyXmlFile = new FileReader(new File(directory + File.separator + "info.xml"));
+            FileReader storyXmlFile = new FileReader(new File(directory + File.separator + "info2.xml"));
             InputSource storyXml = new InputSource(storyXmlFile);
             storyNode = (Node) xPath.evaluate("/",
                     storyXml, XPathConstants.NODE);
@@ -163,11 +165,18 @@ public class Updater {
     public void playAudio(String path){
         try {
             MediaPlayer audio = new MediaPlayer();
+            audio.setAudioStreamType(AudioManager.STREAM_ALARM);
             audio.setDataSource(path);
+            audio.setVolume(1.0f, 1.0f);
             audio.prepare();
             audio.start();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public String getScreenImage(int i){
+        MessageFormat path = new MessageFormat("{0}/screen/item-{1}.png");
+        return path.format(new Object[]{directory, i});
     }
 }

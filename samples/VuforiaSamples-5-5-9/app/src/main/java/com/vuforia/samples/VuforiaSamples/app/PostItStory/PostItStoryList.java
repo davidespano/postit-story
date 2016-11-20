@@ -100,19 +100,26 @@ public class PostItStoryList extends ListActivity
             Map<String, String> datum = new HashMap<String, String>(2);
             for(String story : directories){
                 FileReader storyXmlFile = new FileReader(new File(storyDirectory,
-                        story + File.separator+ "info.xml"));
+                        story + File.separator+ "info2.xml"));
                 InputSource storyXml = new InputSource(storyXmlFile);
                 Node storyNode = (Node) xPath.evaluate("/",
                         storyXml, XPathConstants.NODE);
                 NodeList items = (NodeList) xPath.evaluate("/story/item",
                             storyNode, XPathConstants.NODESET);
+                int words = 0;
+                for(int i = 0; i< items.getLength(); i++){
+                    String value = items.item(i).getFirstChild().getNodeValue();
+                    if(value != null && value.contains("#")){
+                        words ++;
+                    }
+                }
                 String title = (String) xPath.evaluate("/story/@name",
                         storyNode,
                         XPathConstants.STRING);
 
                 datum = new HashMap<>(2);
                 datum.put("title", title);
-                datum.put("words", "(" + items.getLength() + " words)");
+                datum.put("words", "(" + words + " words)");
                 data.add(datum);
 
             }
